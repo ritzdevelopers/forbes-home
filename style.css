@@ -1,0 +1,160 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@700&family=Baskervville:wght@400&display=swap');
+
+/* Font Family Definitions */
+.font-open-sans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.font-libre-baskerville {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-baskervville {
+  font-family: 'Baskervville', serif;
+}
+
+/* Font Weight Utilities */
+.font-regular {
+  font-weight: 400;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+
+#main-navbar.absolute {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Mobile Menu Styles */
+#mobile-menu {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#mobile-menu ul li a,
+#mobile-menu ul li button {
+  display: block;
+  text-align: center;
+}
+
+/* Ensure mobile menu is above everything */
+#mobile-menu {
+  z-index: 9999;
+}
+
+#mobile-menu-btn {
+  z-index: 10000;
+}
+
+/* Close icon visibility */
+#close-icon {
+  display: block !important;
+}
+
+#close-icon.hidden {
+  display: none !important;
+}
+
+/* Menu icon visibility */
+#menu-icon.hidden {
+  display: none !important;
+}
+
+/* Mobile menu button when menu is open */
+#mobile-menu-btn.fixed {
+  position: fixed !important;
+  top: 1.5rem !important;
+  right: 1.5rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  #main-navbar.fixed {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Hero Slider Styles */
+#slider-image {
+  transition: opacity 0.8s ease-in-out;
+}
+
+.slider-dot {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.slider-dot:hover {
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments for slider section */
+@media (max-width: 768px) {
+  .s1 {
+    min-height: 70vh;
+  }
+  
+  #slider-pagination {
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .s1 {
+    min-height: 60vh;
+  }
+}
+
+/* Smooth scrolling enhancement */
+html {
+  scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
+}
+
+/* Performance optimization for animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure smooth transitions for animated elements */
+section,
+div[class*="rounded"],
+button {
+  will-change: transform, opacity;
+}
+
+/* Prevent layout shift during animations */
+.animate-on-scroll,
+.animate-fade-in,
+.animate-slide-left,
+.animate-slide-right,
+.animate-scale {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
