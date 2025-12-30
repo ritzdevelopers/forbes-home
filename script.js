@@ -340,61 +340,18 @@ function initSlider() {
   startSlider();
 }
 
-// Update slider content
+// Update slider - only background images change, content stays static
 function updateSlider(slideIndex) {
   const slide = sliderData[slideIndex];
   
-  // Update image with fade effect
+  // Update image with fade effect - ONLY IMAGE CHANGES
   if (sliderImage) {
     sliderImage.style.opacity = '0';
     setTimeout(() => {
       sliderImage.src = slide.image;
-      sliderImage.alt = slide.title;
+      sliderImage.alt = 'slider';
       sliderImage.style.opacity = '1';
     }, 300);
-  }
-
-  // Update content with fade effect
-  if (sliderSubtitle) {
-    gsap.to(sliderSubtitle, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
-      sliderSubtitle.textContent = slide.subtitle;
-      gsap.to(sliderSubtitle, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  }
-
-  if (sliderTitle) {
-    gsap.to(sliderTitle, { opacity: 0, y: -10, duration: 0.3, onComplete: () => {
-      sliderTitle.textContent = slide.title;
-      gsap.to(sliderTitle, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  }
-
-  if (sliderDescription) {
-    gsap.to(sliderDescription, { opacity: 0, y: -10, duration: 0.3, delay: 0.1, onComplete: () => {
-      sliderDescription.textContent = slide.description;
-      gsap.to(sliderDescription, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  }
-
-  if (sliderSubheading) {
-    gsap.to(sliderSubheading, { opacity: 0, y: -10, duration: 0.3, delay: 0.1, onComplete: () => {
-      sliderSubheading.textContent = slide.subheading;
-      gsap.to(sliderSubheading, { opacity: 1, y: 0, duration: 0.5 });
-    }});
-  }
-
-  // Update features
-  if (featureIcon1 && slide.features[0]) {
-    featureIcon1.src = slide.features[0].icon;
-    featureText1.textContent = slide.features[0].text;
-  }
-  if (featureIcon2 && slide.features[1]) {
-    featureIcon2.src = slide.features[1].icon;
-    featureText2.textContent = slide.features[1].text;
-  }
-  if (featureIcon3 && slide.features[2]) {
-    featureIcon3.src = slide.features[2].icon;
-    featureText3.textContent = slide.features[2].text;
   }
 
   // Update pagination dots
@@ -673,87 +630,6 @@ function initAnimations() {
         },
         ease: 'power2.out'
       });
-    }
-  }
-
-  // ============================================
-  // Section 3 Animations
-  // ============================================
-  const sec3 = document.getElementById('sec3');
-  if (sec3) {
-    const sec3Heading = document.getElementById('sec3-heading');
-    if (sec3Heading) {
-      gsap.from(sec3Heading.children, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: sec3Heading,
-          start: 'top 85%',
-          end: 'top 60%',
-          toggleActions: 'play none none none'
-        },
-        ease: 'power3.out'
-      });
-    }
-
-    const sec3Content = document.getElementById('sec3-content');
-    if (sec3Content) {
-      const sec3ContentInner = document.getElementById('sec3-content-inner');
-      if (sec3ContentInner) {
-        const row1 = document.getElementById('sec3-content-row1');
-        const row2 = document.getElementById('sec3-content-row2');
-        const row3 = document.getElementById('sec3-content-row3');
-        
-        if (row1) {
-          gsap.from(row1.children, {
-            opacity: 0,
-            x: -60,
-            duration: 1.2,
-            stagger: 0.15,
-            scrollTrigger: {
-              trigger: sec3Content,
-              start: 'top 80%',
-              end: 'top 50%',
-              toggleActions: 'play none none none'
-            },
-            ease: 'power3.out'
-          });
-        }
-        
-        if (row2) {
-          gsap.from(row2, {
-            opacity: 0,
-            x: -60,
-            duration: 1.2,
-            delay: 0.3,
-            scrollTrigger: {
-              trigger: sec3Content,
-              start: 'top 80%',
-              end: 'top 50%',
-              toggleActions: 'play none none none'
-            },
-            ease: 'power3.out'
-          });
-        }
-        
-        if (row3) {
-          gsap.from(row3, {
-            opacity: 0,
-            x: -60,
-            duration: 1.2,
-            delay: 0.5,
-            scrollTrigger: {
-              trigger: sec3Content,
-              start: 'top 80%',
-              end: 'top 50%',
-              toggleActions: 'play none none none'
-            },
-            ease: 'power3.out'
-          });
-        }
-      }
     }
   }
 
@@ -1051,361 +927,266 @@ function initAnimations() {
     }
   }
 
-  // ============================================
-  // Hover Animations - Cards and Text
-  // ============================================
-  
-  // Function to animate text on hover with y-axis and fade effect
-  function addHoverTextAnimation(element) {
-    if (!element) return;
-    
-    // Find all text elements (p, h1, h2, h3, h4, h5, h6, span, a, li) within the element
-    const textElements = element.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, a, li, button');
-    
-    if (textElements.length === 0) return;
-    
-    // Set initial state for text elements
-    gsap.set(textElements, { opacity: 1, y: 0 });
-    
-    // Store original positions
-    const originalPositions = Array.from(textElements).map(el => ({
-      element: el,
-      y: gsap.getProperty(el, 'y') || 0
-    }));
-    
-    element.addEventListener('mouseenter', () => {
-      textElements.forEach((textEl, index) => {
-        gsap.fromTo(textEl, 
-          {
-            opacity: 0.3,
-            y: 20
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            delay: index * 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
-    });
-    
-    element.addEventListener('mouseleave', () => {
-      textElements.forEach((textEl) => {
-        gsap.to(textEl, {
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-      });
-    });
+}
+
+// ============================================
+// Enquiry Popup Modal Functionality
+// ============================================
+
+// Initialize popup when DOM is ready
+function initEnquiryPopup() {
+  const enquiryPopup = document.getElementById('enquiry-popup');
+  const popupContent = document.getElementById('popup-content');
+  const popupOverlay = document.getElementById('popup-overlay');
+  const popupCloseBtn = document.getElementById('popup-close-btn');
+  const enquiryForm = document.getElementById('enquiry-form');
+  const enquiryTriggers = document.querySelectorAll('.enquiry-popup-trigger');
+
+  if (!enquiryPopup || !popupContent) {
+    return; // Popup elements don't exist, skip initialization
   }
 
-  // Animate buttons on hover with GSAP
-  const buttons = document.querySelectorAll('button, a[href="#"]');
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-      gsap.to(button, {
-        scale: 1.05,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
+  let isPopupOpen = false;
+
+  // Open popup function
+  function openEnquiryPopup() {
+    if (isPopupOpen) return;
     
-    button.addEventListener('mouseleave', () => {
-      gsap.to(button, {
-        scale: 1,
+    isPopupOpen = true;
+    enquiryPopup.classList.remove('hidden');
+    enquiryPopup.classList.add('flex');
+    document.body.classList.add('popup-open');
+    
+    // GSAP animation for popup (if GSAP is available)
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(enquiryPopup,
+        { opacity: 0 },
+        { 
+          opacity: 1, 
+          duration: 0.3, 
+          ease: 'power2.out',
+          onComplete: () => {
+            enquiryPopup.classList.add('active');
+          }
+        }
+      );
+      
+      gsap.fromTo(popupContent,
+        { 
+          scale: 0.9, 
+          opacity: 0, 
+          y: 50 
+        },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.4, 
+          ease: 'power3.out',
+          delay: 0.1
+        }
+      );
+    } else {
+      // Fallback if GSAP is not loaded
+      enquiryPopup.classList.add('active');
+    }
+    
+    // Focus on first input for accessibility
+    setTimeout(() => {
+      const firstInput = enquiryForm.querySelector('input');
+      if (firstInput) {
+        firstInput.focus();
+      }
+    }, 500);
+  }
+
+  // Close popup function
+  function closeEnquiryPopup() {
+    if (!isPopupOpen) return;
+    
+    isPopupOpen = false;
+    
+    // GSAP animation for closing (if GSAP is available)
+    if (typeof gsap !== 'undefined') {
+      gsap.to(popupContent, {
+        scale: 0.9,
+        opacity: 0,
+        y: 50,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.in'
       });
+      
+      gsap.to(enquiryPopup, {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        delay: 0.1,
+        onComplete: () => {
+          enquiryPopup.classList.remove('active', 'flex');
+          enquiryPopup.classList.add('hidden');
+          document.body.classList.remove('popup-open');
+          // Reset form
+          enquiryForm.reset();
+        }
+      });
+    } else {
+      // Fallback if GSAP is not loaded
+      enquiryPopup.classList.remove('active', 'flex');
+      enquiryPopup.classList.add('hidden');
+      document.body.classList.remove('popup-open');
+      enquiryForm.reset();
+    }
+  }
+
+  // Event listeners for trigger buttons
+  enquiryTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      // If it's a link, prevent default navigation
+      if (this.tagName === 'A') {
+        e.preventDefault();
+      }
+      
+      // Close mobile menu if open
+      if (typeof closeMobileMenu === 'function' && typeof isMenuOpen !== 'undefined' && isMenuOpen) {
+        closeMobileMenu();
+      }
+      
+      openEnquiryPopup();
     });
   });
 
-  // ============================================
-  // Section 2 Hover Animations
-  // ============================================
-  // Section 2 Cards
-  const sec2Card1 = document.getElementById('sec2-card1');
-  const sec2Card2 = document.getElementById('sec2-card2');
-  if (sec2Card1) addHoverTextAnimation(sec2Card1);
-  if (sec2Card2) addHoverTextAnimation(sec2Card2);
-  
-  // Section 2 Row 2 Cards
-  const sec2Row2LeftBottomCard = document.getElementById('sec2-row2-left-bottom-card');
-  const sec2Row2RightTopLeft = document.getElementById('sec2-row2-right-top-left');
-  const sec2Row2RightTopRight = document.getElementById('sec2-row2-right-top-right');
-  const sec2Row2RightBottom = document.getElementById('sec2-row2-right-bottom');
-  if (sec2Row2LeftBottomCard) addHoverTextAnimation(sec2Row2LeftBottomCard);
-  if (sec2Row2RightTopLeft) addHoverTextAnimation(sec2Row2RightTopLeft);
-  if (sec2Row2RightTopRight) addHoverTextAnimation(sec2Row2RightTopRight);
-  if (sec2Row2RightBottom) addHoverTextAnimation(sec2Row2RightBottom);
-  
-  // Section 2 Left Content (text container)
-  const sec2LeftContent = document.getElementById('sec2-left-content');
-  if (sec2LeftContent) {
-    const leftContentTexts = sec2LeftContent.querySelectorAll('p, h2, a');
-    if (leftContentTexts.length > 0) {
-      sec2LeftContent.addEventListener('mouseenter', () => {
-        gsap.fromTo(leftContentTexts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
-  }
-  
-  // Section 2 Row 2 Left Top
-  const sec2Row2LeftTop = document.getElementById('sec2-row2-left-top');
-  if (sec2Row2LeftTop) {
-    const row2LeftTopTexts = sec2Row2LeftTop.querySelectorAll('p, h2');
-    if (row2LeftTopTexts.length > 0) {
-      sec2Row2LeftTop.addEventListener('mouseenter', () => {
-        gsap.fromTo(row2LeftTopTexts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
+  // Close button event listener
+  if (popupCloseBtn) {
+    popupCloseBtn.addEventListener('click', closeEnquiryPopup);
   }
 
-  // ============================================
-  // Section 3 Hover Animations
-  // ============================================
-  const sec3Heading = document.getElementById('sec3-heading');
-  if (sec3Heading) {
-    const sec3HeadingTexts = sec3Heading.querySelectorAll('p, h2');
-    if (sec3HeadingTexts.length > 0) {
-      sec3Heading.addEventListener('mouseenter', () => {
-        gsap.fromTo(sec3HeadingTexts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
-  }
-  
-  const sec3Content = document.getElementById('sec3-content');
-  if (sec3Content) {
-    const sec3ContentTexts = sec3Content.querySelectorAll('p, h2, h3');
-    if (sec3ContentTexts.length > 0) {
-      sec3Content.addEventListener('mouseenter', () => {
-        gsap.fromTo(sec3ContentTexts,
-          {
-            opacity: 0.4,
-            y: 20
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
+  // Close on overlay click
+  if (popupOverlay) {
+    popupOverlay.addEventListener('click', closeEnquiryPopup);
   }
 
-  // ============================================
-  // Section 4 Hover Animations
-  // ============================================
-  // Section 4 Featured Content
-  const sec4FeaturedContent = document.getElementById('sec4-featured-content');
-  if (sec4FeaturedContent) {
-    const featuredTexts = sec4FeaturedContent.querySelectorAll('p, h2, h3, li, button');
-    if (featuredTexts.length > 0) {
-      sec4FeaturedContent.addEventListener('mouseenter', () => {
-        gsap.fromTo(featuredTexts,
-          {
-            opacity: 0.4,
-            y: 20
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isPopupOpen) {
+      closeEnquiryPopup();
     }
-  }
-  
-  // Section 4 Cards
-  const sec4Card1 = document.getElementById('sec4-card1');
-  const sec4Card2 = document.getElementById('sec4-card2');
-  const sec4Card3 = document.getElementById('sec4-card3');
-  if (sec4Card1) addHoverTextAnimation(sec4Card1);
-  if (sec4Card2) addHoverTextAnimation(sec4Card2);
-  if (sec4Card3) addHoverTextAnimation(sec4Card3);
-  
-  // Section 4 Form
-  const sec4Form = document.getElementById('sec4-form');
-  if (sec4Form) {
-    const formTexts = sec4Form.querySelectorAll('p, input, button');
-    if (formTexts.length > 0) {
-      sec4Form.addEventListener('mouseenter', () => {
-        gsap.fromTo(formTexts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
+  });
+
+  // Form submission handler
+  if (enquiryForm) {
+    enquiryForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(enquiryForm);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        property: formData.get('property'),
+        message: formData.get('message')
+      };
+      
+      // Here you can add your form submission logic
+      // For example: send to an API endpoint
+      console.log('Form submitted:', data);
+      
+      // Show success message (you can customize this)
+      const submitBtn = enquiryForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      
+      // Simulate form submission (replace with actual API call)
+      setTimeout(() => {
+        submitBtn.textContent = 'Submitted Successfully!';
+        submitBtn.style.backgroundColor = '#28a745';
+        
+        setTimeout(() => {
+          closeEnquiryPopup();
+          submitBtn.textContent = originalText;
+          submitBtn.style.backgroundColor = '';
+          submitBtn.disabled = false;
+        }, 1500);
+      }, 1000);
+    });
   }
 
-  // ============================================
-  // Footer Hover Animations
-  // ============================================
-  const footerCol1 = document.getElementById('footer-col1');
-  const footerCol2 = document.getElementById('footer-col2');
-  const footerCol3 = document.getElementById('footer-col3');
-  const footerCol4 = document.getElementById('footer-col4');
+  // Prevent popup content click from closing popup
+  popupContent.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+}
+
+// Initialize popup when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEnquiryPopup);
+} else {
+  initEnquiryPopup();
+}
+
+// ============================================
+// Section 3 Tab Functionality
+// ============================================
+function initSec3Tabs() {
+  const sec3Img = document.getElementById('sec3-img');
+  const sec3Tabs = document.querySelectorAll('.sec3-tab');
   
-  if (footerCol1) {
-    const col1Texts = footerCol1.querySelectorAll('p, input, li');
-    if (col1Texts.length > 0) {
-      footerCol1.addEventListener('mouseenter', () => {
-        gsap.fromTo(col1Texts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
+  if (!sec3Img || sec3Tabs.length === 0) {
+    return; // Elements don't exist, skip initialization
   }
-  
-  if (footerCol2) {
-    const col2Texts = footerCol2.querySelectorAll('p, li');
-    if (col2Texts.length > 0) {
-      footerCol2.addEventListener('mouseenter', () => {
-        gsap.fromTo(col2Texts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
+
+  // Image URLs for each tab
+  const sec3Images = [
+    'img/s3/s3-i1.png', // Tab 0 - First tab uses existing image
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop', // Tab 1
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop', // Tab 2
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop'  // Tab 3
+  ];
+
+  // Initialize first tab as active
+  let activeTabIndex = 0;
+
+  // Function to update active tab
+  function updateSec3Tab(tabIndex) {
+    if (tabIndex === activeTabIndex) return;
+    
+    // Remove active border from all tabs (keep padding)
+    sec3Tabs.forEach(tab => {
+      tab.classList.remove('border-b-[1px]', 'border-[#EE8F76]');
+    });
+
+    // Add active border to clicked tab
+    if (sec3Tabs[tabIndex]) {
+      sec3Tabs[tabIndex].classList.add('border-b-[1px]', 'border-[#EE8F76]');
     }
-  }
-  
-  if (footerCol3) {
-    const col3Texts = footerCol3.querySelectorAll('p, li');
-    if (col3Texts.length > 0) {
-      footerCol3.addEventListener('mouseenter', () => {
-        gsap.fromTo(col3Texts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
+
+    // Update image with fade effect
+    if (sec3Img && sec3Images[tabIndex]) {
+      sec3Img.style.opacity = '0';
+      setTimeout(() => {
+        sec3Img.src = sec3Images[tabIndex];
+        sec3Img.style.opacity = '1';
+      }, 300);
     }
+
+    activeTabIndex = tabIndex;
   }
-  
-  if (footerCol4) {
-    const col4Texts = footerCol4.querySelectorAll('p, li, div');
-    if (col4Texts.length > 0) {
-      footerCol4.addEventListener('mouseenter', () => {
-        gsap.fromTo(col4Texts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
-  }
-  
-  // Footer Row 1
-  const footerRow1 = document.getElementById('footer-row1');
-  if (footerRow1) {
-    const row1Texts = footerRow1.querySelectorAll('p');
-    if (row1Texts.length > 0) {
-      footerRow1.addEventListener('mouseenter', () => {
-        gsap.fromTo(row1Texts,
-          {
-            opacity: 0.5,
-            y: 15
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: 'power2.out'
-          }
-        );
-      });
-    }
-  }
+
+  // Add click event listeners to tabs
+  sec3Tabs.forEach((tab, index) => {
+    tab.addEventListener('click', function() {
+      updateSec3Tab(index);
+    });
+  });
+}
+
+// Initialize Section 3 tabs when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSec3Tabs);
+} else {
+  initSec3Tabs();
 }
 
 // Initialize animations when DOM is ready
@@ -1414,4 +1195,3 @@ if (document.readyState === 'loading') {
 } else {
   initAnimations();
 }
-

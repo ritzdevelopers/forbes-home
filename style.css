@@ -135,6 +135,20 @@ html {
   scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
 }
 
+/* Section 3 Image Transition */
+#sec3-img {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Section 3 Tab Styles */
+.sec3-tab {
+  transition: all 0.3s ease;
+}
+
+.sec3-tab:hover {
+  opacity: 0.9;
+}
+
 /* Performance optimization for animations */
 * {
   -webkit-font-smoothing: antialiased;
@@ -219,5 +233,224 @@ button {
     .xlW {
         width: 1300px !important;
         margin: 0 auto;
+    }
+}
+
+/* ============================================ */
+/* Enquiry Popup Modal Styles */
+/* ============================================ */
+
+/* Popup Container */
+#enquiry-popup {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#enquiry-popup.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Popup Content Animation */
+#popup-content {
+    max-height: 90vh;
+    overflow-y: auto;
+    min-height: 500px;
+}
+
+#enquiry-popup.active #popup-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Left Image Section */
+#popup-content > div:first-of-type {
+    min-height: 300px;
+}
+
+/* Right Form Section */
+#popup-content > div:last-of-type {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Popup Scrollbar Styling */
+#popup-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#popup-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#popup-content::-webkit-scrollbar-thumb {
+    background: #CF4422;
+    border-radius: 10px;
+}
+
+#popup-content::-webkit-scrollbar-thumb:hover {
+    background: #BF4423;
+}
+
+/* Form Input Styles - Border Bottom Only */
+#enquiry-form input,
+#enquiry-form textarea {
+    transition: all 0.2s ease;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+}
+
+#enquiry-form input:focus,
+#enquiry-form textarea:focus {
+    border-bottom-color: #CF4422 !important;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#enquiry-form input:focus-visible,
+#enquiry-form textarea:focus-visible {
+    outline: none;
+}
+
+/* Form Input Placeholder */
+#enquiry-form input::placeholder,
+#enquiry-form textarea::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+/* Select Dropdown Styling */
+#enquiry-form select {
+    cursor: pointer;
+}
+
+#enquiry-form select option {
+    padding: 12px;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Close Button Styles */
+#popup-close-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#popup-close-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Submit Button Styles */
+#enquiry-form button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+}
+
+#enquiry-form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+#enquiry-form button[type="submit"]:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+#enquiry-form button[type="submit"]:active {
+    transform: scale(0.99);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    #popup-content {
+        max-height: 95vh;
+        margin: 1rem;
+        border-radius: 20px;
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    #enquiry-popup.active #popup-content {
+        transform: scale(1);
+    }
+
+    /* Stack form fields on mobile */
+    #enquiry-form .grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 640px) {
+    #popup-content {
+        max-height: 98vh;
+        margin: 0.75rem;
+        border-radius: 18px;
+    }
+
+    /* Prevent body scroll when popup is open */
+    body.popup-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* Prevent scroll on body when popup is active */
+body.popup-open {
+    overflow: hidden;
+}
+
+/* Smooth transitions for all popup elements */
+#popup-overlay,
+#popup-content,
+#popup-close-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Accessibility - Focus visible for keyboard navigation */
+#popup-close-btn:focus-visible {
+    outline: 2px solid #CF4422;
+    outline-offset: 2px;
+    background-color: #f3f4f6;
+}
+
+#enquiry-form input:focus-visible,
+#enquiry-form textarea:focus-visible,
+#enquiry-form select:focus-visible {
+    outline: none;
+}
+
+#enquiry-form button[type="submit"]:focus-visible {
+    outline: 3px solid rgba(207, 68, 34, 0.5);
+    outline-offset: 2px;
+}
+
+/* Remove default select arrow in Firefox */
+#enquiry-form select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+/* Custom select arrow for better cross-browser support */
+@supports (-webkit-appearance: none) or (appearance: none) {
+    #enquiry-form select {
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 20px;
+        padding-right: 3rem;
     }
 }
