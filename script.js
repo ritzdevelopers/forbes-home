@@ -244,7 +244,7 @@ mobileMenu.addEventListener('touchmove', function(e) {
 // Slider data with Unsplash images
 const sliderData = [
   {
-    image: '/img/s1/s1-img.png',
+    image: '/img/s1/new-l2.png',
     subtitle: 'Forbes Global Properties',
     title: 'A Global Standard. Now in India.',
     description: 'Enjoy Mesmerizing Views From Almost Every Apartment',
@@ -256,7 +256,7 @@ const sliderData = [
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop',
+    image: '/img/s1/new-l2.png',
     subtitle: 'Luxury Living Redefined',
     title: 'Experience Unmatched Elegance',
     description: 'Premium Residences with Panoramic City Views',
@@ -268,7 +268,7 @@ const sliderData = [
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop',
+    image: '/img/s1/new-l2.png',
     subtitle: 'Forbes Global Properties',
     title: 'Where Luxury Meets Lifestyle',
     description: 'Spacious Interiors Designed for Modern Living',
@@ -280,7 +280,7 @@ const sliderData = [
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop',
+    image: '/img/s1/new-l2.png',
     subtitle: 'Elite Residences',
     title: 'Your Dream Home Awaits',
     description: 'Exclusive Properties with World-Class Design',
@@ -292,7 +292,7 @@ const sliderData = [
     ]
   },
   {
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop',
+    image: '/img/s1/new-l2.png',
     subtitle: 'Forbes Global Properties',
     title: 'Redefining Urban Living',
     description: 'Contemporary Architecture with Timeless Appeal',
@@ -312,16 +312,6 @@ const sliderIntervalTime = 5000; // 5 seconds
 // Get slider elements
 const sliderImage = document.getElementById('slider-image');
 const sliderPagination = document.getElementById('slider-pagination');
-const sliderSubtitle = document.getElementById('slider-subtitle');
-const sliderTitle = document.getElementById('slider-title');
-const sliderDescription = document.getElementById('slider-description');
-const sliderSubheading = document.getElementById('slider-subheading');
-const featureIcon1 = document.getElementById('feature-icon-1');
-const featureIcon2 = document.getElementById('feature-icon-2');
-const featureIcon3 = document.getElementById('feature-icon-3');
-const featureText1 = document.getElementById('feature-text-1');
-const featureText2 = document.getElementById('feature-text-2');
-const featureText3 = document.getElementById('feature-text-3');
 
 // Initialize slider
 function initSlider() {
