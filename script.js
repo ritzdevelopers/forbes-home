@@ -244,7 +244,7 @@ mobileMenu.addEventListener('touchmove', function(e) {
 // Slider data with Unsplash images
 const sliderData = [
   {
-    image: '/img/s1/new-l2.png',
+    image: '/img/s1/FGPI_B1.jpg',
     subtitle: 'Forbes Global Properties',
     title: 'A Global Standard. Now in India.',
     description: 'Enjoy Mesmerizing Views From Almost Every Apartment',
@@ -256,7 +256,7 @@ const sliderData = [
     ]
   },
   {
-    image: '/img/s1/new-l2.png',
+    image: '/img/s1/FGPI_B1.jpg',
     subtitle: 'Luxury Living Redefined',
     title: 'Experience Unmatched Elegance',
     description: 'Premium Residences with Panoramic City Views',
@@ -268,7 +268,7 @@ const sliderData = [
     ]
   },
   {
-    image: '/img/s1/new-l2.png',
+    image: '/img/s1/FGPI_B1.jpg',
     subtitle: 'Forbes Global Properties',
     title: 'Where Luxury Meets Lifestyle',
     description: 'Spacious Interiors Designed for Modern Living',
@@ -280,7 +280,7 @@ const sliderData = [
     ]
   },
   {
-    image: '/img/s1/new-l2.png',
+    image: '/img/s1/FGPI_B1.jpg',
     subtitle: 'Elite Residences',
     title: 'Your Dream Home Awaits',
     description: 'Exclusive Properties with World-Class Design',
@@ -292,7 +292,7 @@ const sliderData = [
     ]
   },
   {
-    image: '/img/s1/new-l2.png',
+    image: '/img/s1/FGPI_B1.jpg',
     subtitle: 'Forbes Global Properties',
     title: 'Redefining Urban Living',
     description: 'Contemporary Architecture with Timeless Appeal',
