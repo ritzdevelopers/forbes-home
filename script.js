@@ -309,23 +309,23 @@ mobileMenu.addEventListener('touchmove', function(e) {
 const sliderData = [
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Forbes Global Properties India'
+    title: 'Global Credibility <br> Backed by an international luxury network.'
   },
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Luxury, represented with discretion. Only a chosen portfolio.'
+    title: 'Select Representation <br> Only a curated portfolio earns the spotlight.'
   },
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Homes that hold value. Today, and over time.'
+    title: 'Luxury That Lasts <br> Built for relevance, designed to endure.'
   },
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'A curated portfolio. A trusted name.'
+    title: 'Curated, Not Crowded <br> Quality over quantity, always.'
   },
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Luxury built to last. Value built to endure.'
+    title: 'Trusted Worldwide <br> A name that signals confidence across markets.'
   }
 ];
 
@@ -373,7 +373,7 @@ function updateSlider(slideIndex) {
   if (sliderTitle) {
     sliderTitle.style.opacity = '0';
     setTimeout(() => {
-      sliderTitle.textContent = slide.title;
+      sliderTitle.innerHTML = slide.title;
       sliderTitle.style.opacity = '1';
     }, 300);
   }
@@ -1162,7 +1162,6 @@ function initSec3Tabs() {
     return; // Elements don't exist, skip initialization
   }
 
-  // Image URLs for each tab
   const sec3Images = [
     'img/s3/s3-i1.png', // Tab 0 - First tab uses existing image
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop', // Tab 1
@@ -1177,17 +1176,14 @@ function initSec3Tabs() {
   function updateSec3Tab(tabIndex) {
     if (tabIndex === activeTabIndex) return;
     
-    // Remove active border from all tabs (keep padding)
     sec3Tabs.forEach(tab => {
       tab.classList.remove('border-b-[1px]', 'border-[#EE8F76]');
     });
 
-    // Add active border to clicked tab
     if (sec3Tabs[tabIndex]) {
       sec3Tabs[tabIndex].classList.add('border-b-[1px]', 'border-[#EE8F76]');
     }
 
-    // Update image with fade effect
     if (sec3Img && sec3Images[tabIndex]) {
       sec3Img.style.opacity = '0';
       setTimeout(() => {
