@@ -73,7 +73,7 @@ function handleNavbarScroll() {
   
   if (scrollTop > 50) {
     // User has scrolled down - make navbar fixed at top with black background
-    navbar.classList.remove('absolute', 'top-4', 'md:top-10');
+    navbar.classList.remove('absolute', 'top-0', 'md:top-0');
     navbar.classList.add('fixed', 'top-0', 'bg-black');
     
     // Show scroll logo, hide default logo
@@ -90,7 +90,7 @@ function handleNavbarScroll() {
   } else {
     // User is at the top - restore original position and remove background
     navbar.classList.remove('fixed', 'top-0', 'bg-black');
-    navbar.classList.add('absolute', 'top-4', 'md:top-10');
+    navbar.classList.add('absolute', 'top-0', 'md:top-0');
     
     // Show default logo, hide scroll logo
     defaultLogo.classList.remove('hidden');
