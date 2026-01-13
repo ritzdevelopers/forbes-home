@@ -308,35 +308,36 @@ mobileMenu.addEventListener('touchmove', function(e) {
 // Slider data
 const sliderData = [
   {
+    image: 'img/s1/FGPI_B3.jpg',
+    title: "Where Green Is More Than A Colour It Is's Constant.",
+    text:'text-white'
+  },
+  {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Global Credibility <br> Backed by an international luxury network.',
+    title: 'Where You Breathe Fresh Joy.',
     text:'text-[#ffffff]'
   },
   {
     image: 'img/s1/FGPI_B2.jpg',
-    title: 'Select Representation <br> Only a curated portfolio earns the spotlight.',
+    title: 'Where Your Peace Of Mind Arrives Before The Keys.',
     text:'text-white'
   },
-  {
-    image: 'img/s1/FGPI_B3.jpg',
-    title: 'Luxury That Lasts <br> Built for relevance, designed to endure.',
-    text:'text-white'
-  },
+ 
   {
     image: 'img/s1/FGPI_B4.jpg',
-    title: 'Curated, Not Crowded <br> Quality over quantity, always.',
+    title: 'Where Your Float Through The Day Literally.',
     text:'text-white'
   },
   {
     image: 'img/s1/FGPI_B5.jpg',
-    title: 'Trusted Worldwide <br> A name that signals confidence across markets.',
+    title: 'Where Joy Runs Free Barefoot & Laughing.',
     text:'text-white'
   }
 ];
 
 let currentSlide = 0;
 let sliderInterval;
-const sliderIntervalTime = 5000; // 5 seconds
+const sliderIntervalTime = 10000; // 5 seconds
 
 // Get slider elements
 const sliderImage = document.getElementById('slider-image');
@@ -1779,3 +1780,11 @@ if (document.readyState === 'loading') {
 } else {
   initAllForms();
 }
+
+// Task Done 13/01/2026
+// -- Update Content in The Forbes India Landing Page
+// -- Update Section In One Global Landing Page
+// -- Create Google Sheet And Write Code For Form Submission
+// -- Connect Google Sheet With The Form In The Forbes Landing Page
+// -- Create Loaders and Success Popup For Form Submission
+// -- Create Thank You Page For Form Submission
