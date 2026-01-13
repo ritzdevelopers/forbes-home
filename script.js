@@ -122,6 +122,70 @@ window.addEventListener('load', function() {
   }
 });
 
+// ============================================
+// Smooth Scroll to Sections with Offset
+// ============================================
+function smoothScrollToSection(targetId) {
+  const targetElement = document.querySelector(targetId);
+  if (!targetElement) return;
+
+  // Calculate offset: 5% of viewport height (95% from top)
+  const offset = window.innerHeight * 0.05;
+  
+  // Get target position
+  const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+
+  // Use Lenis if available, otherwise use native smooth scroll
+  if (lenis) {
+    lenis.scrollTo(targetPosition, {
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+  } else {
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+}
+
+// Handle anchor link clicks for smooth scrolling
+function initSmoothScrollLinks() {
+  // Get all anchor links in navigation (desktop and mobile)
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      
+      // Skip if it's just "#" or empty
+      if (!href || href === '#') return;
+      
+      // Prevent default anchor behavior
+      e.preventDefault();
+      
+      // Close mobile menu if open
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) {
+        const isMenuOpen = !mobileMenu.classList.contains('hidden');
+        if (isMenuOpen && typeof closeMobileMenu === 'function') {
+          closeMobileMenu();
+        }
+      }
+      
+      // Smooth scroll to target section
+      smoothScrollToSection(href);
+    });
+  });
+}
+
+// Initialize smooth scroll links when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSmoothScrollLinks);
+} else {
+  initSmoothScrollLinks();
+}
+
 // Mobile Menu Toggle with GSAP
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -241,67 +305,27 @@ mobileMenu.addEventListener('touchmove', function(e) {
 // Hero Section Slider
 // ============================================
 
-// Slider data with Unsplash images
+// Slider data
 const sliderData = [
   {
-    image: '/img/s1/FGPI_B1.jpg',
-    subtitle: 'Forbes Global Properties',
-    title: 'A Global Standard. Now in India.',
-    description: 'Enjoy Mesmerizing Views From Almost Every Apartment',
-    subheading: '3BHK & 4BHK Apartments.',
-    features: [
-      { icon: 'svgs/s1/prime-location.svg', text: 'Prime Location' },
-      { icon: 'svgs/s1/smart-homes.svg', text: 'Smart Home Features' },
-      { icon: 'svgs/s1/s1-amenities.svg', text: 'World Class Amenities' }
-    ]
+    image: 'img/s1/FGPI_B1.jpg',
+    title: 'Forbes Global Properties India'
   },
   {
-    image: '/img/s1/FGPI_B1.jpg',
-    subtitle: 'Luxury Living Redefined',
-    title: 'Experience Unmatched Elegance',
-    description: 'Premium Residences with Panoramic City Views',
-    subheading: '2BHK, 3BHK & 4BHK Available.',
-    features: [
-      { icon: 'svgs/s1/prime-location.svg', text: 'Central Location' },
-      { icon: 'svgs/s1/smart-homes.svg', text: 'Automated Systems' },
-      { icon: 'svgs/s1/s1-amenities.svg', text: 'Premium Facilities' }
-    ]
+    image: 'img/s1/FGPI_B1.jpg',
+    title: 'Luxury, represented with discretion. Only a chosen portfolio.'
   },
   {
-    image: '/img/s1/FGPI_B1.jpg',
-    subtitle: 'Forbes Global Properties',
-    title: 'Where Luxury Meets Lifestyle',
-    description: 'Spacious Interiors Designed for Modern Living',
-    subheading: 'Premium 3BHK & 4BHK Residences.',
-    features: [
-      { icon: 'svgs/s1/prime-location.svg', text: 'Prime Location' },
-      { icon: 'svgs/s1/smart-homes.svg', text: 'Smart Technology' },
-      { icon: 'svgs/s1/s1-amenities.svg', text: 'Luxury Amenities' }
-    ]
+    image: 'img/s1/FGPI_B1.jpg',
+    title: 'Homes that hold value. Today, and over time.'
   },
   {
-    image: '/img/s1/FGPI_B1.jpg',
-    subtitle: 'Elite Residences',
-    title: 'Your Dream Home Awaits',
-    description: 'Exclusive Properties with World-Class Design',
-    subheading: '2BHK, 3BHK & 4BHK Options.',
-    features: [
-      { icon: 'svgs/s1/prime-location.svg', text: 'Strategic Location' },
-      { icon: 'svgs/s1/smart-homes.svg', text: 'Home Automation' },
-      { icon: 'svgs/s1/s1-amenities.svg', text: 'Elite Amenities' }
-    ]
+    image: 'img/s1/FGPI_B1.jpg',
+    title: 'A curated portfolio. A trusted name.'
   },
   {
-    image: '/img/s1/FGPI_B1.jpg',
-    subtitle: 'Forbes Global Properties',
-    title: 'Redefining Urban Living',
-    description: 'Contemporary Architecture with Timeless Appeal',
-    subheading: 'Luxury 3BHK & 4BHK Apartments.',
-    features: [
-      { icon: 'svgs/s1/prime-location.svg', text: 'Prime Location' },
-      { icon: 'svgs/s1/smart-homes.svg', text: 'Intelligent Homes' },
-      { icon: 'svgs/s1/s1-amenities.svg', text: 'Premium Services' }
-    ]
+    image: 'img/s1/FGPI_B1.jpg',
+    title: 'Luxury built to last. Value built to endure.'
   }
 ];
 
@@ -312,6 +336,7 @@ const sliderIntervalTime = 5000; // 5 seconds
 // Get slider elements
 const sliderImage = document.getElementById('slider-image');
 const sliderPagination = document.getElementById('slider-pagination');
+const sliderTitle = document.getElementById('slider-title');
 
 // Initialize slider
 function initSlider() {
@@ -330,11 +355,11 @@ function initSlider() {
   startSlider();
 }
 
-// Update slider - only background images change, content stays static
+// Update slider - image and text content change
 function updateSlider(slideIndex) {
   const slide = sliderData[slideIndex];
   
-  // Update image with fade effect - ONLY IMAGE CHANGES
+  // Update image with fade effect
   if (sliderImage) {
     sliderImage.style.opacity = '0';
     setTimeout(() => {
@@ -343,6 +368,16 @@ function updateSlider(slideIndex) {
       sliderImage.style.opacity = '1';
     }, 300);
   }
+
+  // Update title with fade effect
+  if (sliderTitle) {
+    sliderTitle.style.opacity = '0';
+    setTimeout(() => {
+      sliderTitle.textContent = slide.title;
+      sliderTitle.style.opacity = '1';
+    }, 300);
+  }
+
 
   // Update pagination dots
   const dots = sliderPagination.querySelectorAll('.slider-dot');

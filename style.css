@@ -99,6 +99,11 @@ body.menu-open {
   transition: opacity 0.8s ease-in-out;
 }
 
+#slider-title,
+#slider-description {
+  transition: opacity 0.6s ease-in-out;
+}
+
 .slider-dot {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -526,9 +531,9 @@ body.popup-open {
 
 /* Background image hover effect for section 4 card 2 */
 #sec4-card2 {
-    transition: background-size 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: background-size 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: background-size;
-    background-size: 100%;
+    background-size: 100% !important;
 }
 
 #sec4-card2:hover {
