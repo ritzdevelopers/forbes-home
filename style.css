@@ -555,3 +555,26 @@ body.popup-open {
         background-size: 105% !important;
     }
 }
+
+/* Loader Spinner Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Popup Animations */
+#loader-popup,
+#success-popup,
+#error-popup {
+    transition: opacity 0.3s ease;
+}
+
+#loader-popup.active,
+#success-popup.active,
+#error-popup.active {
+    display: flex !important;
+}

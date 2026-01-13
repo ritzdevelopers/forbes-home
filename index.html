@@ -495,22 +495,22 @@
           <p class="font-[400] text-[22px] md:text-[26px] lg:text-[30px] font-baskervville text-center lg:text-left">
             Request a Call Back
           </p>
-          <form class="flex flex-col gap-4">
+          <form id="callback-form" class="flex flex-col gap-4">
             <div class="flex flex-col sm:flex-row gap-4">
-              <input type="text"
-                class="w-full  xl:w-[250px] h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
+              <input type="text" name="Name" required
+                class="w-full  h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
                 placeholder="Your Name*" />
-              <input type="text"
-                class="w-full  xl:w-[250px] h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
+              <input type="tel" name="Phone" required
+                class="w-full  h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
                 placeholder="Phone Number*" />
-              <input type="text"
-                class="w-full  xl:w-[250px] h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
+              <input type="email" name="Email" required
+                class="w-full  h-[45px] md:h-[50px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
                 placeholder="Email*" />
             </div>
-            <input type="text"
+            <input type="text" name="Message" required
               class="w-full lg:w-[100%] h-[50px] md:h-[60px] bg-[#F9F9F9] rounded-[8px] md:rounded-[10px] border-none pl-4 text-[14px] md:text-[16px]"
               placeholder="Message*" />
-            <button
+            <button type="submit"
               class="w-full lg:w-[100%] h-[50px] md:h-[60px] bg-[#BF4423] text-white rounded-[4px] font-[600] text-[14px] md:text-[16px] hover:bg-[#BF4423] cursor-pointer">
               Get a Call Back
             </button>
@@ -574,13 +574,13 @@
               <div class="flex gap-4 md:gap-6">
                 <img src="svgs/email.svg" alt="email" class="w-[18px] h-[18px] md:w-[21px] md:h-[21px] flex-shrink-0" />
                 <p class="font-[400] text-[14px] md:text-[16px] font-open-sans">
-                  info@fabluxe.com
+                  sales@fgpindia.com
                 </p>
               </div>
               <div class="flex gap-4 md:gap-6">
                 <img src="svgs/phone.svg" alt="phone" class="w-[18px] h-[18px] md:w-[21px] md:h-[21px] flex-shrink-0" />
                 <p class="font-[400] text-[14px] md:text-[16px] font-open-sans">
-                  +91 99887 76655
+                  8888760760
                 </p>
               </div>
             </div>
@@ -652,20 +652,25 @@
             <p class="font-[700] text-[12px] md:text-[14px] uppercase font-open-sans mb-2 md:mb-0 text-center md:text-left">
               Expert insights direct to your inbox
             </p>
-            <div class="relative w-full">
-              <input type="text"
-                class="w-full xl:w-[524px] border-b-[1px] border-black h-[50px] md:h-[60px] bg-transparent outline-none placeholder:text-[#636363] font-[400] text-[16px] md:text-[18px] placeholder:text-[16px] md:placeholder:text-[18px] pr-8 text-center md:text-left"
+            <form id="footer-email-form" class="relative w-full">
+              <input type="email" name="Email" id="footer-email-input" required
+                class="w-full xl:w-[524px] border-b-[1px] border-black h-[50px] md:h-[60px] bg-transparent outline-none placeholder:text-[#636363] font-[400] text-[16px] md:text-[18px] placeholder:text-[16px] md:placeholder:text-[18px] pr-8 text-center md:text-left pl-2"
                 placeholder="Enter your email" />
-              <img src="img/bl-arr.png" alt="arr3-icn"
-                class="absolute right-0 top-1/2 translate-y-[-50%] w-[32px] h-[11px]" />
-            </div>
+              <button type="submit" class="absolute right-2 top-1/2 translate-y-[-50%] bg-transparent border-none cursor-pointer p-0" aria-label="Submit email">
+                <img src="img/bl-arr.png" alt="arr3-icn"
+                  class="w-[32px] h-[11px] pointer-events-none" />
+              </button>
+            </form>
           </div>
           <div class="flex flex-col gap-2 items-center md:items-start">
             <p class="font-[700] text-[12px] md:text-[14px] uppercase font-open-sans text-center md:text-left">
               get in touch
             </p>
             <p class="font-[400] text-[14px] md:text-[16px] font-open-sans text-center md:text-left">
-              info@fabluxe.com
+              sales@fgpindia.com
+            </p>
+            <p class="font-[400] text-[14px] md:text-[16px] font-open-sans text-center md:text-left">
+             +91 8888760760
             </p>
           </div>
         </div>
@@ -676,8 +681,7 @@
             find us
           </p>
           <ul class="flex flex-col gap-2 font-[400] text-[12px] md:text-[14px] text-black mt-2 md:mt-0 font-open-sans text-center md:text-left">
-            <li>Address: 1,</li>
-            <li>Link Road, Kapashera,</li>
+            <li>1, Link Road, Kapashera,</li>
             <li>New Delhi</li>
           </ul>
         </div>
@@ -688,14 +692,10 @@
             quick links
           </p>
           <ul class="flex flex-col gap-2 font-[400] text-[12px] md:text-[14px] text-black mt-2 md:mt-0 font-open-sans text-center md:text-left">
-            <li>About Us</li>
-            <li>Featured Projects</li>
-            <li>Our Philosopy</li>
-            <li>Insights</li>
-            <li>Why Choose Us</li>
-            <li>Blogs</li>
-            <li>Portfolio</li>
-            <li>Contact Us</li>
+            <li><a href="#about-fgp-india" class="hover:text-[#BF4423] transition-colors cursor-pointer">About FGP</a></li>
+            <li><a href="#luxury-clearity" class="hover:text-[#BF4423] transition-colors cursor-pointer">Luxury & Clearity</a></li>
+            <li><a href="#featured-project" class="hover:text-[#BF4423] transition-colors cursor-pointer">Featured Project</a></li>
+            <li><a href="#" class="enquiry-popup-trigger hover:text-[#BF4423] transition-colors cursor-pointer">Get in Touch</a></li>
           </ul>
         </div>
 
@@ -706,39 +706,39 @@
           </p>
           <ul class="flex flex-col gap-3 md:gap-4 items-center md:items-start">
             <li>
-              <div class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B]">
-                <img src="img/insta-black.png" alt="instgram" class="w-[17px] h-[17px] " />
+              <a href="https://www.instagram.com/fabluxe.residences/" target="_blank" rel="noopener noreferrer" class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B] hover:opacity-80 transition-opacity cursor-pointer">
+                <img src="img/insta-black.png" alt="Instagram" class="w-[17px] h-[17px] " />
                 <p class="font-[400] text-[12px] md:text-[14px] font-open-sans">
                   Instagram
                 </p>
-              </div>
+              </a>
             </li>
 
             <li>
-              <div class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B]">
-                <img src="img/x-black.png" alt="instgram" class="w-[18px] h-[18px] " />
+              <a href="https://x.com/fab_luxe" target="_blank" rel="noopener noreferrer" class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B] hover:opacity-80 transition-opacity cursor-pointer">
+                <img src="img/x-black.png" alt="Twitter" class="w-[18px] h-[18px] " />
                 <p class="font-[400] text-[12px] md:text-[14px] font-open-sans">
                   Twitter
                 </p>
-              </div>
+              </a>
             </li>
 
             <li>
-              <div class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B]">
-                <img src="img/linkd-black.png" alt="instgram" class="w-[17px] h-[17px] " />
+              <a href="https://www.linkedin.com/company/fab-luxe-residences" target="_blank" rel="noopener noreferrer" class="flex gap-2 pb-3 md:pb-4 w-full md:w-[120px] justify-center md:justify-start md:border-b-[1px] md:border-[#B9A57B] hover:opacity-80 transition-opacity cursor-pointer">
+                <img src="img/linkd-black.png" alt="LinkedIn" class="w-[17px] h-[17px] " />
                 <p class="font-[400] text-[12px] md:text-[14px] font-open-sans">
                   LinkedIn
                 </p>
-              </div>
+              </a>
             </li>
 
             <li>
-              <div class="flex gap-2 pb-0 w-full md:w-[120px] justify-center md:justify-start">
-                <img src="img/yt-black.png" alt="instgram" class="w-[14px] h-[14px] " />
+              <a href="https://www.youtube.com/@FabLuxeResidences" target="_blank" rel="noopener noreferrer" class="flex gap-2 pb-0 w-full md:w-[120px] justify-center md:justify-start hover:opacity-80 transition-opacity cursor-pointer">
+                <img src="img/yt-black.png" alt="YouTube" class="w-[14px] h-[14px] " />
                 <p class="font-[400] text-[12px] md:text-[14px] font-open-sans">
                   Youtube
                 </p>
-              </div>
+              </a>
             </li>
           </ul>
         </div>
@@ -773,7 +773,7 @@
 
     <!-- Popup Content -->
     <div id="popup-content"
-      class="relative w-full max-w-[1000px] md:max-w-[1100px] mx-4 bg-white rounded-[24px] md:rounded-[28px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform scale-95 opacity-0 transition-all duration-300 flex flex-col md:flex-row">
+      class="relative w-full max-w-[700px] md:max-w-[800px] mx-4 bg-white rounded-[20px] md:rounded-[24px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform scale-95 opacity-0 transition-all duration-300 flex flex-col md:flex-row max-h-[90vh] overflow-y-auto">
       <!-- Close Button -->
       <button id="popup-close-btn"
         class="absolute top-5 right-5 md:top-6 md:right-6 z-20 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-transparent hover:bg-gray-100 text-gray-400 hover:text-gray-600 rounded-full transition-all duration-300 group"
@@ -785,71 +785,71 @@
       </button>
 
       <!-- Left Section - Image -->
-      <div class="w-full md:w-1/2 h-[300px] md:h-auto bg-gray-200 overflow-hidden">
-        <img src="img/s1/s1-img.png" alt="Luxury Property" class="w-full h-full object-cover" />
+      <div class="w-full md:w-2/5 h-[200px] md:h-auto bg-gray-200 overflow-hidden">
+        <img src="img/s2/forbes-founder.png" alt="Luxury Property" class="w-full h-full object-cover" />
       </div>
 
       <!-- Right Section - Greeting and Form -->
-      <div class="w-full md:w-1/2 flex flex-col">
+      <div class="w-full md:w-3/5 flex flex-col">
         <!-- Greeting Message -->
-        <div class="px-8 md:px-10 lg:px-12 pt-10 md:pt-12 pb-6 md:pb-8">
-          <h2 class="text-black font-[700] text-[28px] md:text-[32px] lg:text-[36px] font-libre-baskerville mb-3">
+        <div class="px-6 md:px-8 pt-6 md:pt-8 pb-4 md:pb-5">
+          <h2 class="text-black font-[700] text-[22px] md:text-[26px] font-libre-baskerville mb-2">
             Request Information
           </h2>
-          <p class="text-gray-600 font-[400] text-[14px] md:text-[15px] font-open-sans">
+          <p class="text-gray-600 font-[400] text-[13px] md:text-[14px] font-open-sans">
             Connect with our luxury property experts
           </p>
         </div>
 
         <!-- Popup Form -->
-        <div class="px-8 md:px-10 lg:px-12 pb-8 md:pb-10 flex-1">
-          <form id="enquiry-form" class="flex flex-col gap-6 md:gap-7">
+        <div class="px-6 md:px-8 pb-6 md:pb-8 flex-1">
+          <form id="enquiry-form" class="flex flex-col gap-4 md:gap-5">
             <!-- Name, Email, Phone in Single Row -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
               <!-- Name Field -->
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-1.5">
                 <label for="popup-name"
-                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans uppercase tracking-[0.5px]">
+                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans">
                   Name <span class="text-[#CF4422]">*</span>
                 </label>
-                <input type="text" id="popup-name" name="name" required placeholder="John Doe"
-                  class="w-full h-[48px] md:h-[50px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
+                <input type="text" id="popup-name" name="Name" placeholder="Name" required
+                  class="w-full h-[42px] md:h-[45px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
               </div>
 
               <!-- Email Field -->
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-1.5">
                 <label for="popup-email"
-                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans uppercase tracking-[0.5px]">
+                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans">
                   Email <span class="text-[#CF4422]">*</span>
                 </label>
-                <input type="email" id="popup-email" name="email" required placeholder="john@example.com"
-                  class="w-full h-[48px] md:h-[50px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
+                <input type="email" id="popup-email" name="Email" placeholder="Email" required
+                  class="w-full h-[42px] md:h-[45px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
               </div>
 
               <!-- Phone Field -->
-              <div class="flex flex-col gap-2">
+              <div class="flex flex-col gap-1.5">
                 <label for="popup-phone"
-                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans uppercase tracking-[0.5px]">
+                  class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans">
                   Phone <span class="text-[#CF4422]">*</span>
                 </label>
-                <input type="tel" id="popup-phone" name="phone" required placeholder="+1 234 567 8900"
-                  class="w-full h-[48px] md:h-[50px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
+                <input type="tel" id="popup-phone" name="Phone" placeholder="Phone" required
+                  class="w-full h-[42px] md:h-[45px] px-0 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 bg-transparent" />
               </div>
             </div>
 
             <!-- Message Field -->
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1.5">
               <label for="popup-message"
-                class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans uppercase tracking-[0.5px]">
+                class="text-black font-[600] text-[12px] md:text-[13px] font-open-sans">
                 Message
               </label>
-              <textarea id="popup-message" name="message" rows="4" placeholder="Tell us about your requirements..."
-                class="w-full px-0 pt-2 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 resize-none bg-transparent min-h-[100px]"></textarea>
+              <textarea id="popup-message" name="Message" rows="3" placeholder="Message"
+                class="w-full px-0 pt-2 pb-2 border-0 border-b-2 border-gray-300 text-black font-[400] text-[14px] md:text-[15px] font-open-sans focus:outline-none focus:border-[#CF4422] transition-colors duration-200 resize-none bg-transparent min-h-[80px]"></textarea>
             </div>
 
             <!-- Submit Button -->
             <button type="submit"
-              class="w-full h-[52px] md:h-[56px] bg-[#CF4422] hover:bg-[#BF4423] text-white font-[700] text-[14px] md:text-[15px] rounded-[8px] font-open-sans transition-all duration-300 hover:shadow-lg hover:shadow-[#CF4422]/30 hover:scale-[1.01] active:scale-[0.99] mt-2 uppercase tracking-[0.5px]">
+              class="w-full h-[46px] md:h-[50px] bg-[#CF4422] hover:bg-[#BF4423] text-white font-[700] text-[13px] md:text-[14px] rounded-[6px] font-open-sans transition-all duration-300 hover:shadow-lg hover:shadow-[#CF4422]/30 hover:scale-[1.01] active:scale-[0.99] mt-1 uppercase tracking-[0.5px]">
               Submit Request
             </button>
 
@@ -857,13 +857,59 @@
             <p
               class="text-gray-500 font-[400] text-[11px] md:text-[12px] font-open-sans text-center mt-2 leading-relaxed">
               By submitting this form, you agree to our
-              <span class="text-[#CF4422] hover:underline cursor-pointer">privacy policy</span>
+             privacy policy
               and
-              <span class="text-[#CF4422] hover:underline cursor-pointer">terms of service</span>.
+             terms of service.
             </p>
           </form>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Loader Popup -->
+  <div id="loader-popup" class="fixed inset-0 z-[20000] hidden items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
+    <div class="bg-white rounded-[20px] md:rounded-[24px] p-8 md:p-12 flex flex-col items-center gap-6 md:gap-8 max-w-[400px] mx-4">
+      <div class="loader-spinner w-16 h-16 md:w-20 md:h-20 border-4 border-[#F9F9F9] border-t-[#CF4422] rounded-full animate-spin"></div>
+      <p class="text-black font-[600] text-[16px] md:text-[18px] font-open-sans text-center">Submitting your request...</p>
+      <p class="text-gray-600 font-[400] text-[14px] md:text-[15px] font-open-sans text-center">Please wait</p>
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div id="success-popup" class="fixed inset-0 z-[20000] hidden items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
+    <div class="bg-white rounded-[20px] md:rounded-[24px] p-8 md:p-12 flex flex-col items-center gap-6 md:gap-8 max-w-[500px] mx-4 text-center">
+      <div class="w-20 h-20 md:w-24 md:h-24 bg-[#28a745] rounded-full flex items-center justify-center">
+        <svg class="w-12 h-12 md:w-14 md:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-black font-[700] text-[24px] md:text-[28px] font-libre-baskerville">Success!</h3>
+        <p class="text-gray-600 font-[400] text-[15px] md:text-[16px] font-open-sans">Your request has been submitted successfully.</p>
+        <p class="text-gray-500 font-[400] text-[13px] md:text-[14px] font-open-sans">We'll get back to you soon.</p>
+      </div>
+      <button id="success-popup-close" class="w-full md:w-auto px-8 py-3 bg-[#CF4422] hover:bg-[#BF4423] text-white font-[600] text-[14px] md:text-[16px] rounded-[8px] font-open-sans transition-all duration-300">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Error Popup -->
+  <div id="error-popup" class="fixed inset-0 z-[20000] hidden items-center justify-center bg-black bg-opacity-75 backdrop-blur-sm">
+    <div class="bg-white rounded-[20px] md:rounded-[24px] p-8 md:p-12 flex flex-col items-center gap-6 md:gap-8 max-w-[500px] mx-4 text-center">
+      <div class="w-20 h-20 md:w-24 md:h-24 bg-[#dc3545] rounded-full flex items-center justify-center">
+        <svg class="w-12 h-12 md:w-14 md:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-black font-[700] text-[24px] md:text-[28px] font-libre-baskerville">Error!</h3>
+        <p id="error-popup-message" class="text-gray-600 font-[400] text-[15px] md:text-[16px] font-open-sans">Something went wrong. Please try again.</p>
+      </div>
+      <button id="error-popup-close" class="w-full md:w-auto px-8 py-3 bg-[#CF4422] hover:bg-[#BF4423] text-white font-[600] text-[14px] md:text-[16px] rounded-[8px] font-open-sans transition-all duration-300">
+        Try Again
+      </button>
     </div>
   </div>
 

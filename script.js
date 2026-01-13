@@ -969,6 +969,484 @@ function initAnimations() {
 }
 
 // ============================================
+// Google Sheets Form Submission Function
+// ============================================
+
+// ⚠️ IMPORTANT: Replace this with your Google Apps Script Web App URL
+// 
+// SETUP INSTRUCTIONS:
+// 1. Open your Google Apps Script project
+// 2. Click "Deploy" > "New deployment"
+// 3. Click the gear icon ⚙️ next to "Select type" and choose "Web app"
+// 4. Set "Execute as" to "Me"
+// 5. Set "Who has access" to "Anyone" (required for web forms)
+// 6. Click "Deploy" and copy the Web App URL
+// 7. Paste the URL below
+//
+// UPDATED GOOGLE APPS SCRIPT CODE (with CORS support):
+// Replace your doPost function return statement with this:
+//
+// return ContentService
+//   .createTextOutput(JSON.stringify({ result: 'success', row: nextRow }))
+//   .setMimeType(ContentService.MimeType.JSON)
+//   .setHeaders({
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+//     'Access-Control-Allow-Headers': 'Content-Type'
+//   });
+//
+// And add this doOptions function for CORS preflight:
+// function doOptions() {
+//   return ContentService
+//     .createTextOutput('')
+//     .setMimeType(ContentService.MimeType.JSON)
+//     .setHeaders({
+//       'Access-Control-Allow-Origin': '*',
+//       'Access-Control-Allow-Methods': 'POST, OPTIONS',
+//       'Access-Control-Allow-Headers': 'Content-Type'
+//     });
+// }
+//
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-OML58IQbPy0mVe6zKU71qMns7dbW3mXWJhbY3yHpR8S3HQHGs_vUIxdh-BPqqDB9/exec';
+
+// ============================================
+// Popup Control Functions
+// ============================================
+
+/**
+ * Show loader popup
+ */
+function showLoader() {
+  const loader = document.getElementById('loader-popup');
+  if (loader) {
+    loader.classList.remove('hidden');
+    loader.classList.add('flex', 'active');
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(loader, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+    }
+  }
+}
+
+/**
+ * Hide loader popup
+ */
+function hideLoader() {
+  const loader = document.getElementById('loader-popup');
+  if (loader) {
+    if (typeof gsap !== 'undefined') {
+      gsap.to(loader, {
+        opacity: 0,
+        duration: 0.3,
+        onComplete: () => {
+          loader.classList.add('hidden');
+          loader.classList.remove('flex', 'active');
+        }
+      });
+    } else {
+      loader.classList.add('hidden');
+      loader.classList.remove('flex', 'active');
+    }
+  }
+}
+
+/**
+ * Show success popup
+ */
+function showSuccessPopup() {
+  const successPopup = document.getElementById('success-popup');
+  if (successPopup) {
+    successPopup.classList.remove('hidden');
+    successPopup.classList.add('flex', 'active');
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(successPopup, 
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: 'power3.out' }
+      );
+    }
+  }
+}
+
+/**
+ * Hide success popup
+ */
+function hideSuccessPopup() {
+  const successPopup = document.getElementById('success-popup');
+  if (successPopup) {
+    if (typeof gsap !== 'undefined') {
+      gsap.to(successPopup, {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.3,
+        onComplete: () => {
+          successPopup.classList.add('hidden');
+          successPopup.classList.remove('flex', 'active');
+        }
+      });
+    } else {
+      successPopup.classList.add('hidden');
+      successPopup.classList.remove('flex', 'active');
+    }
+  }
+}
+
+/**
+ * Show error popup with message
+ */
+function showErrorPopup(message = 'Something went wrong. Please try again.') {
+  const errorPopup = document.getElementById('error-popup');
+  const errorMessage = document.getElementById('error-popup-message');
+  if (errorMessage) {
+    errorMessage.textContent = message;
+  }
+  if (errorPopup) {
+    errorPopup.classList.remove('hidden');
+    errorPopup.classList.add('flex', 'active');
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(errorPopup,
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: 'power3.out' }
+      );
+    }
+  }
+}
+
+/**
+ * Hide error popup
+ */
+function hideErrorPopup() {
+  const errorPopup = document.getElementById('error-popup');
+  if (errorPopup) {
+    if (typeof gsap !== 'undefined') {
+      gsap.to(errorPopup, {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.3,
+        onComplete: () => {
+          errorPopup.classList.add('hidden');
+          errorPopup.classList.remove('flex', 'active');
+        }
+      });
+    } else {
+      errorPopup.classList.add('hidden');
+      errorPopup.classList.remove('flex', 'active');
+    }
+  }
+}
+
+// Initialize popup close buttons
+function initPopupCloseButtons() {
+  const successClose = document.getElementById('success-popup-close');
+  const errorClose = document.getElementById('error-popup-close');
+  
+  if (successClose) {
+    successClose.addEventListener('click', hideSuccessPopup);
+  }
+  
+  if (errorClose) {
+    errorClose.addEventListener('click', hideErrorPopup);
+  }
+  
+  // Close on overlay click
+  const successPopup = document.getElementById('success-popup');
+  const errorPopup = document.getElementById('error-popup');
+  
+  if (successPopup) {
+    successPopup.addEventListener('click', (e) => {
+      if (e.target === successPopup) {
+        hideSuccessPopup();
+      }
+    });
+  }
+  
+  if (errorPopup) {
+    errorPopup.addEventListener('click', (e) => {
+      if (e.target === errorPopup) {
+        hideErrorPopup();
+      }
+    });
+  }
+}
+
+// Initialize popup close buttons when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPopupCloseButtons);
+} else {
+  initPopupCloseButtons();
+}
+
+/**
+ * Universal function to submit form data to Google Sheets
+ * @param {HTMLFormElement} form - The form element to submit
+ * @param {string} sheetName - The name of the Google Sheet tab to write to
+ * @param {Object} options - Optional configuration
+ * @param {Function} options.onSuccess - Callback function on successful submission
+ * @param {Function} options.onError - Callback function on error
+ * @param {Function} options.onComplete - Callback function after submission (success or error)
+ */
+async function submitToGoogleSheets(form, sheetName, options = {}) {
+  // Validate inputs
+  if (!form || !sheetName) {
+    console.error('Form and sheetName are required');
+    if (options.onError) options.onError('Form and sheet name are required');
+    return;
+  }
+
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+    console.error('Google Script URL not configured. Please set GOOGLE_SCRIPT_URL in script.js');
+    alert('Form submission is not configured. Please contact the administrator.');
+    if (options.onError) options.onError('Google Script URL not configured');
+    return;
+  }
+
+  // Get submit button
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn ? submitBtn.textContent : '';
+  const originalBtnBg = submitBtn ? submitBtn.style.backgroundColor : '';
+  const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+  const hasImage = submitBtn ? submitBtn.querySelector('img') : null;
+
+  // Disable submit button and show loading state
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    // Only change text if button doesn't contain an image (for image buttons like footer arrow)
+    const hasImage = submitBtn.querySelector('img');
+    if (!hasImage) {
+      submitBtn.textContent = 'Submitting...';
+    } else {
+      // For image buttons, just change opacity
+      if (submitBtn.style) {
+        submitBtn.style.opacity = '0.5';
+      }
+    }
+    if (submitBtn.style) {
+      submitBtn.style.cursor = 'not-allowed';
+    }
+  }
+
+  // Show loader popup
+  showLoader();
+
+  try {
+    // Collect form data
+    const formData = new FormData(form);
+    const data = {};
+
+    // Convert FormData to object
+    for (const [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+
+    // Add Date and Time in Indian format (IST - Indian Standard Time)
+    // IST is UTC+5:30
+    const now = new Date();
+    
+    // Get UTC time components
+    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
+    // Add IST offset (5 hours 30 minutes = 5.5 * 60 * 60 * 1000 milliseconds)
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(utcTime + istOffset);
+    
+    // Format Date as DD/MM/YYYY (Indian format)
+    const day = String(istTime.getDate()).padStart(2, '0');
+    const month = String(istTime.getMonth() + 1).padStart(2, '0');
+    const year = istTime.getFullYear();
+    data.Date = `${day}/${month}/${year}`;
+    
+    // Format Time as HH:MM:SS (24-hour format, IST)
+    const hours = String(istTime.getHours()).padStart(2, '0');
+    const minutes = String(istTime.getMinutes()).padStart(2, '0');
+    const seconds = String(istTime.getSeconds()).padStart(2, '0');
+    data.Time = `${hours}:${minutes}:${seconds}`;
+    
+    // Debug log to verify
+    console.log('Date:', data.Date, 'Time:', data.Time);
+
+    // Add sheetName to data
+    data.sheetName = sheetName;
+
+    // Convert data to URL-encoded format (as expected by Google Apps Script)
+    const params = new URLSearchParams();
+    Object.keys(data).forEach(key => {
+      // Always include Date, Time, and sheetName even if empty
+      if (key === 'Date' || key === 'Time' || key === 'sheetName') {
+        params.append(key, data[key] || '');
+      } else if (data[key] !== null && data[key] !== undefined && data[key] !== '') {
+        params.append(key, data[key]);
+      }
+    });
+    
+    // Debug: Log all params being sent
+    console.log('Form data being sent:', Object.fromEntries(params));
+    console.log('Time value:', data.Time);
+    console.log('Date value:', data.Date);
+
+    // Try to send POST request with CORS first (if enabled in Google Apps Script)
+    let response;
+    let submissionSuccess = false;
+    
+    try {
+      // Try with CORS enabled (if Google Apps Script has CORS headers)
+      response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString()
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.result === 'success') {
+          submissionSuccess = true;
+        } else {
+          throw new Error(result.error?.message || 'Submission failed');
+        }
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (corsError) {
+      // If CORS fails, try with no-cors mode (assumes success if no network error)
+      console.log('CORS not enabled, using no-cors mode:', corsError);
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: params.toString()
+        });
+        // With no-cors, we assume success if no network error
+        submissionSuccess = true;
+      } catch (networkError) {
+        throw networkError;
+      }
+    }
+
+    if (!submissionSuccess) {
+      throw new Error('Form submission failed');
+    }
+
+    // Hide loader
+    hideLoader();
+
+    // Close enquiry popup if it's open (for enquiry form)
+    const isEnquiryForm = form.id === 'enquiry-form';
+    if (isEnquiryForm) {
+      const enquiryPopup = document.getElementById('enquiry-popup');
+      const popupContent = document.getElementById('popup-content');
+      if (enquiryPopup && !enquiryPopup.classList.contains('hidden')) {
+        // Close popup with animation
+        if (typeof gsap !== 'undefined' && popupContent) {
+          gsap.to(popupContent, {
+            scale: 0.9,
+            opacity: 0,
+            y: 50,
+            duration: 0.3,
+            ease: 'power2.in'
+          });
+          gsap.to(enquiryPopup, {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.in',
+            delay: 0.1,
+            onComplete: () => {
+              enquiryPopup.classList.remove('active', 'flex');
+              enquiryPopup.classList.add('hidden');
+              document.body.classList.remove('popup-open');
+            }
+          });
+        } else {
+          // Fallback: just hide it
+          enquiryPopup.classList.add('hidden');
+          enquiryPopup.classList.remove('flex', 'active');
+          document.body.classList.remove('popup-open');
+        }
+      }
+    }
+    
+    // ALL forms navigate to thank you page after successful submission
+    // Small delay to allow any popups to close smoothly
+    setTimeout(() => {
+      window.location.href = 'thankyou.html';
+    }, isEnquiryForm ? 400 : 300);
+
+    // Call success callback
+    if (options.onSuccess) {
+      options.onSuccess(data);
+    }
+
+    // Note: onComplete callback won't execute since we navigate away
+    // All forms navigate to thank you page after successful submission
+
+  } catch (error) {
+    console.error('Error submitting form to Google Sheets:', error);
+    
+    // Hide loader
+    hideLoader();
+    
+    // Show error popup
+    const errorMessage = error.message || 'There was an error submitting the form. Please try again later.';
+    showErrorPopup(errorMessage);
+
+    // Reset button immediately
+    if (submitBtn) {
+      // Restore button content (text or HTML with image)
+      if (hasImage && originalBtnHtml) {
+        submitBtn.innerHTML = originalBtnHtml;
+      } else {
+        submitBtn.textContent = originalBtnText;
+      }
+      submitBtn.style.backgroundColor = originalBtnBg;
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = '';
+    }
+
+    // Call error callback
+    if (options.onError) {
+      options.onError(error);
+    }
+
+    if (options.onComplete) {
+      options.onComplete(false);
+    }
+  }
+}
+
+/**
+ * Initialize form submission for a specific form
+ * @param {string} formSelector - CSS selector for the form
+ * @param {string} sheetName - Name of the Google Sheet tab
+ * @param {Object} options - Optional callbacks
+ */
+function initFormSubmission(formSelector, sheetName, options = {}) {
+  const form = document.querySelector(formSelector);
+  if (!form) {
+    console.warn(`Form not found: ${formSelector}`);
+    return;
+  }
+
+  console.log(`Form initialized: ${formSelector} with sheet: ${sheetName}`);
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Basic validation
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    console.log(`Submitting form: ${formSelector} to sheet: ${sheetName}`);
+    
+    // Submit to Google Sheets
+    await submitToGoogleSheets(form, sheetName, options);
+  });
+}
+
+// ============================================
 // Enquiry Popup Modal Functionality
 // ============================================
 
@@ -1112,43 +1590,27 @@ function initEnquiryPopup() {
     }
   });
 
-  // Form submission handler
+  // Form submission handler - using universal Google Sheets function
   if (enquiryForm) {
-    enquiryForm.addEventListener('submit', function(e) {
+    enquiryForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      // Get form data
-      const formData = new FormData(enquiryForm);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        property: formData.get('property'),
-        message: formData.get('message')
-      };
-      
-      // Here you can add your form submission logic
-      // For example: send to an API endpoint
-      console.log('Form submitted:', data);
-      
-      // Show success message (you can customize this)
-      const submitBtn = enquiryForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Submitting...';
-      submitBtn.disabled = true;
-      
-      // Simulate form submission (replace with actual API call)
-      setTimeout(() => {
-        submitBtn.textContent = 'Submitted Successfully!';
-        submitBtn.style.backgroundColor = '#28a745';
-        
-        setTimeout(() => {
-          closeEnquiryPopup();
-          submitBtn.textContent = originalText;
-          submitBtn.style.backgroundColor = '';
-          submitBtn.disabled = false;
-        }, 1500);
-      }, 1000);
+      // Basic validation
+      if (!enquiryForm.checkValidity()) {
+        enquiryForm.reportValidity();
+        return;
+      }
+
+      // Submit to Google Sheets with sheet name "Sheet1"
+      // Navigation to thank you page is handled in submitToGoogleSheets function
+      await submitToGoogleSheets(enquiryForm, 'Sheet1', {
+        onSuccess: (data) => {
+          console.log('Enquiry form submitted successfully:', data);
+        },
+        onError: (error) => {
+          console.error('Error submitting enquiry form:', error);
+        }
+      });
     });
   }
 
@@ -1229,4 +1691,91 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initAnimations);
 } else {
   initAnimations();
+}
+
+// ============================================
+// Initialize All Form Submissions
+// ============================================
+function initAllForms() {
+  // Initialize "Request a Call Back" form
+  // Using "Sheet1" to match other forms
+  initFormSubmission('#callback-form', 'Sheet1', {
+    onSuccess: (data) => {
+      console.log('Callback form submitted successfully:', data);
+    },
+    onError: (error) => {
+      console.error('Error submitting callback form:', error);
+    }
+  });
+
+  // Enquiry form is already initialized in initEnquiryPopup()
+  // It uses sheet name: "Sheet1"
+
+  // Initialize footer email form with special handling
+  const footerEmailForm = document.getElementById('footer-email-form');
+  if (footerEmailForm) {
+    footerEmailForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Basic validation
+      if (!footerEmailForm.checkValidity()) {
+        footerEmailForm.reportValidity();
+        return;
+      }
+
+      // Get email from form
+      const emailInput = document.getElementById('footer-email-input');
+      const email = emailInput ? emailInput.value.trim() : '';
+
+      if (!email) {
+        return;
+      }
+
+      // Add hidden fields to the form for Name, Phone, and Message
+      // Check if they already exist to avoid duplicates
+      let nameField = footerEmailForm.querySelector('input[name="Name"]');
+      if (!nameField) {
+        nameField = document.createElement('input');
+        nameField.type = 'hidden';
+        nameField.name = 'Name';
+        footerEmailForm.appendChild(nameField);
+      }
+      nameField.value = '';
+
+      let phoneField = footerEmailForm.querySelector('input[name="Phone"]');
+      if (!phoneField) {
+        phoneField = document.createElement('input');
+        phoneField.type = 'hidden';
+        phoneField.name = 'Phone';
+        footerEmailForm.appendChild(phoneField);
+      }
+      phoneField.value = '';
+
+      let messageField = footerEmailForm.querySelector('input[name="Message"], textarea[name="Message"]');
+      if (!messageField) {
+        messageField = document.createElement('input');
+        messageField.type = 'hidden';
+        messageField.name = 'Message';
+        footerEmailForm.appendChild(messageField);
+      }
+      messageField.value = 'bottom enquiry';
+
+      // Submit using the same function - will navigate to thank you page on success
+      await submitToGoogleSheets(footerEmailForm, 'Sheet1', {
+        onSuccess: (data) => {
+          console.log('Footer email form submitted successfully:', data);
+        },
+        onError: (error) => {
+          console.error('Error submitting footer email form:', error);
+        }
+      });
+    });
+  }
+}
+
+// Initialize forms when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllForms);
+} else {
+  initAllForms();
 }
