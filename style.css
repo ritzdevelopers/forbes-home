@@ -81,7 +81,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-  #main-navbar.fixed {
+  #i.fixed {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }

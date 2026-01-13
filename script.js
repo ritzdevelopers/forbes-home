@@ -130,7 +130,7 @@ function smoothScrollToSection(targetId) {
   if (!targetElement) return;
 
   // Calculate offset: 5% of viewport height (95% from top)
-  const offset = window.innerHeight * 0.05;
+  const offset = window.innerHeight * 0.15;
   
   // Get target position
   const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -309,23 +309,28 @@ mobileMenu.addEventListener('touchmove', function(e) {
 const sliderData = [
   {
     image: 'img/s1/FGPI_B1.jpg',
-    title: 'Global Credibility <br> Backed by an international luxury network.'
+    title: 'Global Credibility <br> Backed by an international luxury network.',
+    text:'text-[#ffffff]'
   },
   {
-    image: 'img/s1/FGPI_B1.jpg',
-    title: 'Select Representation <br> Only a curated portfolio earns the spotlight.'
+    image: 'img/s1/FGPI_B2.jpg',
+    title: 'Select Representation <br> Only a curated portfolio earns the spotlight.',
+    text:'text-white'
   },
   {
-    image: 'img/s1/FGPI_B1.jpg',
-    title: 'Luxury That Lasts <br> Built for relevance, designed to endure.'
+    image: 'img/s1/FGPI_B3.jpg',
+    title: 'Luxury That Lasts <br> Built for relevance, designed to endure.',
+    text:'text-white'
   },
   {
-    image: 'img/s1/FGPI_B1.jpg',
-    title: 'Curated, Not Crowded <br> Quality over quantity, always.'
+    image: 'img/s1/FGPI_B4.jpg',
+    title: 'Curated, Not Crowded <br> Quality over quantity, always.',
+    text:'text-white'
   },
   {
-    image: 'img/s1/FGPI_B1.jpg',
-    title: 'Trusted Worldwide <br> A name that signals confidence across markets.'
+    image: 'img/s1/FGPI_B5.jpg',
+    title: 'Trusted Worldwide <br> A name that signals confidence across markets.',
+    text:'text-white'
   }
 ];
 
@@ -373,6 +378,15 @@ function updateSlider(slideIndex) {
   if (sliderTitle) {
     sliderTitle.style.opacity = '0';
     setTimeout(() => {
+      // Remove existing text color classes (handle both standard and arbitrary values)
+      const textColorClasses = ['text-white', 'text-[#BF4423]', 'text-black', 'text-gray-900'];
+      textColorClasses.forEach(className => {
+        sliderTitle.classList.remove(className);
+      });
+      // Apply new text color class from slide data
+      if (slide.text) {
+        sliderTitle.classList.add(slide.text);
+      }
       sliderTitle.innerHTML = slide.title;
       sliderTitle.style.opacity = '1';
     }, 300);
