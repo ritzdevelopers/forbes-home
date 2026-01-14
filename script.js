@@ -309,7 +309,7 @@ mobileMenu.addEventListener('touchmove', function(e) {
 const sliderData = [
   {
     image: 'img/s1/FGPI_B3.jpg',
-    title: "Where Green Is More Than A Colour It Is's Constant.",
+    title: "Where Green Is More Than A Colour It's A Constant.",
     text:'text-white'
   },
   {
@@ -1781,10 +1781,3 @@ if (document.readyState === 'loading') {
   initAllForms();
 }
 
-// Task Done 13/01/2026
-// -- Update Content in The Forbes India Landing Page
-// -- Update Section In One Global Landing Page
-// -- Create Google Sheet And Write Code For Form Submission
-// -- Connect Google Sheet With The Form In The Forbes Landing Page
-// -- Create Loaders and Success Popup For Form Submission
-// -- Create Thank You Page For Form Submission
